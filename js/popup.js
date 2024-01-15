@@ -20,9 +20,11 @@ let click_assisState = false;
 function updateAssisState(state){
     console.log("upAssistantState:"+state);
     if(state){
-        messState.text("已启用！");
+        messState.innerHTML="已启用！";
+        messState.style.color = 'green';
     }else{
-        messState.text("未启用！");
+        messState.innerHTML="未启用！";
+        messState.style.color = 'red';
     }
 }
 
