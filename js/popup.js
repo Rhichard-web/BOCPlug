@@ -1,61 +1,51 @@
-// $(function(){
-//     $('#input1').keyup(function(){
-//         $('#message').text('你好，'+$('#input1').val());
-//     });
-// })
-
-//计时器
-// let startTime;
-// let endTime;
-// const timeDisplay  = document.getElementById("timer");
-
-// document.getElementById('st')
 
 const messState = document.getElementById("messState");
-const onState = document.getElementById("onState");
-const closeState = document.getElementById("closeState");
-const assisState  = document.getElementById("assisState");
-let click_assisState = false;
+let toggleState = false;
 
-function updateAssisState(state){
-    console.log("upAssistantState:"+state);
-    if(state){
-        messState.innerHTML="已启用！";
+function updateAssisState(state) {
+    console.log("upAssistantState:" + state);
+    if (state) {
+        messState.innerHTML = "已启用！";
         messState.style.color = 'green';
-    }else{
-        messState.innerHTML="未启用！";
+    } else {
+        messState.innerHTML = "未启用！";
         messState.style.color = 'red';
     }
 }
 
-try{
-    chrome.storage.sync.get("click_assisState", (result)=>{
-        click_assisState = result.click_assisState;
-        updateAssisState(click_assisState);
+try {
+    chrome.storage.sync.get("toggleState", (result) => {
+        toggleState = result.toggleState;
+        updateAssisState(toggleState);
     });
-}catch(err){
-    click_assisState = false;
-    chrome.storage.sync.set({"click_assisState":click_assisState},()=>{
-        updateAssisState(click_assisState);
+} catch (err) {
+    toggleState = false;
+    chrome.storage.sync.set({ "toggleState": toggleState }, () => {
+        updateAssisState(toggleState);
     });
 }
-// assisState.addEventListener("click", (event)=>{
-//     click_assisState = !click_assisState;
-//     chrome.storage.sync.set({"click_assisState":click_assisState},()=>{
-//         updateAssisState(click_assisState);
-//     });
-// })
 
 
-onState.addEventListener("click", (event)=>{
-    chrome.storage.sync.set({"click_assisState" : true},()=>{
-        updateAssisState(true);
-    })
-})
+const toggle = document.getElementById('toggle');
 
-closeState.addEventListener("click", (event)=>{
-    console.log("qiyong");
-    chrome.storage.sync.set({"click_assisState" : false},()=>{
-        updateAssisState(false);
-    })
-})
+document.addEventListener('DOMContentLoaded', function () {
+
+    // 加载页面时设置滑动按钮状态
+    toggleState = localStorage.getItem('toggleState') === 'true';
+    toggle.checked = toggleState;
+
+    // 监听滑动按钮的变化
+    toggle.addEventListener('change', function () {
+        localStorage.setItem('toggleState', toggle.checked);
+        chrome.storage.sync.set({ "toggleState": toggle.checked }, () => {
+            updateAssisState(toggle.checked);
+        })
+    });
+});
+
+
+
+//计时器
+// let startTime;
+// let endTime;
+// const timeDisplay  = document.getElemen tById("timer");

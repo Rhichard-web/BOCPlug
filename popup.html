@@ -9,18 +9,29 @@
     <script src="js/jquery-3.3.1.min.js"></script>
     <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="js/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body style="width: 250px;height: 200px;">
+<body style="width: 300px;height: 100px;">
     <div class="container">
-        <div>
-            <span> </span>
-            <h5>核准小助手启用状态：<h4 id="messState">未启用！</h4></h5>
-            <button id="onState" class="btn btn-lg btn-primary" type="button">启用</button>
-            <button id="closeState" class="btn btn-secondary btn-lg" type="button">禁用</button>
-            <!-- <button id = "assisState" class="button-red" type="button">未启用</button> -->
-        </div>
+        <div class="center-both">
+            <div class="flex-container">
+                <h5>核准小助手状态：</h5>
+                <label class="switch">
+                    <input type="checkbox" id="toggle">
+                    <span class="slider"></span>
+                  </label>
+            </div>
+        </div>   
+        <h4 id="messState" class="center-both">未启用！</h4>
+        <!-- <div class="center-both">
+            <button id="onState" class="btn btn-outline-success" type="button"> 启用 </button>
+            <button id="closeState" class="btn btn-outline-danger" type="button"> 禁用 </button>
+        </div> -->
+
+          
     </div>
+
     <script src="js/popup.js"></script>
 </body>
 
